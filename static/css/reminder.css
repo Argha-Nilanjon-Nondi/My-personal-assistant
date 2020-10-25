@@ -1,0 +1,144 @@
+
+  .rem-ele{
+  width:800px;
+ margin:20px auto;
+ border:4px solid lightgreen;
+ padding:4px;
+  }
+  
+  .rem-header{
+  margin:4px;
+  border:4px solid lightgreen;
+  padding:6px;
+  }
+  
+  .rem-header>div>p{
+  color:lightgreen;
+  font-size:50px;
+  font-weight:400;
+  word-spacing:3px;
+  text-align:center;
+  }
+  
+  .rem-time{
+  margin:4px;
+  border:4px solid lightgreen;
+  padding:6px;  
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  }
+  
+  .rem-time>div>p{
+  color:lightgreen;
+  font-size:40px;
+  font-weight:400;
+  word-spacing:3px;
+  text-align:center;
+  }  
+  
+  .rem-left{
+  margin:4px;
+  border:4px solid lightgreen;
+  padding:6px; 
+  }
+
+  .rem-left>div>p{ 
+  color:lightgreen;
+  font-size:40px;
+  font-weight:400;
+  word-spacing:3px;
+  text-align:center;  
+  } 
+ 
+  
+  .rem-del{
+ 
+  } 
+   
+  .trcolorfalse>div>a{
+ display:block;
+  margin:0 auto;
+  text-decoration:none;
+  color:black;
+  font-size:40px;
+  font-weight:700;
+  text-align:center;
+  }
+  
+  .trcolor>div>a{
+ display:block;
+  margin:0 auto;
+  text-decoration:none;
+  color:black;
+  font-size:40px;
+  font-weight:700;
+  text-align:center;
+  }
+  
+  .trcolor{
+  background:red;
+  }
+  
+  .trcolorfalse{
+ background:lightgreen;
+  }        
+  
+  #reminder-add{
+  padding:5px;
+  margin:10px;
+  }
+  
+  #reminder-add > p{
+  font-size:100px;
+  color:black;
+  border:2px solid silver;
+  display:inline;
+  padding:10px;
+   background:lightgreen;
+  }
+  
+   #reminder-add:hover > #reminder-form{
+   display:block;
+   }
+   
+  #reminder-form{
+  display:none;
+  }
+  
+  #reminder-add > div > form{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  }
+  
+  #reminder-add > div > form > input,select{
+  border:4px solid lightgreen;
+  border-radius:20px;
+  width:500px;
+  padding:10px;
+  font-size:40px;
+  background:none;
+  color:lightgreen;
+  margin-top:20px;
+  }
+
+  #reminder-add > div > form > textarea{
+  border:8px solid lightgreen;
+  border-radius:20px;
+  width:800px;
+  padding:10px;
+  font-size:35px;
+  color:lightgreen;
+  margin-top:20px;
+  background:none;
+  }
+  
+  #reminder-add > div > form > input[type="submit"]{
+  width:250px;
+  border:4px solid lightgreen;
+  border-radius:20px;
+  padding:4px;
+  font-size:35px;
+  color:lightgreen;
+  margin-top:20px;
+  }

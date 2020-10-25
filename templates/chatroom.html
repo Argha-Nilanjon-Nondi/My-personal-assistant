@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    
+   <link rel="stylesheet" href="/static/css/style.css">
+    <title>Chat room</title>
+
+   <style>
+
+
+   </style>
+
+  </head>
+
+  <body>
+
+ 
+<!--Navbar starts-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+ <a class="navbar-brand custom-text" href="/home/">
+    <img src="/static/img/ai2.gif" width="30" height="30" class="d-inline-block align-top" alt="">
+    Avunix
+  </a>
+  <button class="navbar-toggler custom-text" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link custom-text" href="/home/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link custom-text dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tools
+        </a>
+        <div class="dropdown-menu custom-bg custom-border" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item custom-text" href="/money/">Money recoder</a>
+          <div class="dropdown-divider custom-divider"></div>
+          <a class="dropdown-item custom-text" href="/reminder/">Reminder</a>
+          <div class="dropdown-divider custom-divider"></div>
+          
+          <a class="dropdown-item custom-text" href="/trace/">Traceoute</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link custom-text" href="/certificate/">Certificate <span class="sr-only">(current)</span></a>
+      </li>      
+      <li class="nav-item">
+        <a class="nav-link custom-text custom-active" href="/chatroom/">Chat Room <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+  <!-- Button trigger modal -->
+<a type="button" class="nav-link custom-text" data-toggle="modal" data-target="#exampleModal">
+  Logout
+</a>
+      </li>      
+    </ul>
+  </div>
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content custom-bg custom-border">
+      <div class="modal-header">
+        <h5 class="modal-title custom-text" id="exampleModalLabel">Logout</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom-text">
+        Logout if you want . Don't worry about data and records.
+      </div>
+      <div class="modal-footer custom-divider">
+        <button type="button" class="custom-modal-btn btn btn-secondary" data-dismiss="modal">Close</button>
+        <a type="button" href="/logout/" class="custom-modal-btn btn btn-primary">Logout me</a>
+      </div>
+    </div>
+  </div>
+</div>
+</nav>
+<!--Navbar ends-->
+
+<!--Chat room starts-->
+<div class="container py-2 my-3">
+
+<div class="row justify-content-center" id="chatroom-user">
+
+</div>
+
+</div>
+<!--Chat room ends-->
+
+
+      <script src="/static/js/jquery-3.5.1.slim.min.js" ></script>
+    <script src="/static/js/popper.min.js" ></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+  
+  <script type="text/javascript">
+
+    try{
+    
+    
+   let dbid="";
+   
+  
+  async function getData(url){
+  
+  let params={method:"post"};
+  
+  const domain=await fetch(url,params);
+  
+  let data = await domain.json();
+  
+  return data.data;
+  
+  }
+  
+    getData("/dbid/").then((data)=>{
+  
+   dbid+=data;
+  
+  })/*.catch(()=>{
+  
+  alert("There is a problem in your network");
+  
+  });   */
+  
+  getData("/chatroom/data/").then((data)=>{
+  
+   const chat_user=document.getElementById("chatroom-user");
+   
+   data.forEach((ele)=>{
+   
+     const name=ele[0];
+     const dbid=`/chat_me/${ele[1]}/${name}/`;
+     
+     const card=document.createElement("div");
+     card.className="card col-12 col-sm-3 mx-2 my-2";
+     card.className+=" custom-bg custom-border"
+     
+     card.innerHTML=`<div class="card-body">
+    <h5 class="card-title custom-text">${name}</h5>
+    <a href=${dbid} class="btn custom-btn custom-submit-btn">Chat with me</a>
+  </div>`;
+  
+     chat_user.appendChild(card);
+   
+   });
+   
+  
+  })/*.catch(()=>{
+  
+  alert("There is a problem in your network");
+  
+  });   */
+
+    }
+
+    catch(a){
+    alert(a.name+" "+a.message);
+    }
+
+ </script>
+
+  </body>
+
+</html>

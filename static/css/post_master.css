@@ -1,0 +1,122 @@
+   #post-form{
+   width:900px;
+   margin:0 auto;
+   }
+   
+   .element{
+   display:grid;
+   margin:10px auto;
+   /*border:2px solid red;*/
+   }
+    
+   #grid-0{
+   grid-template-columns:1fr;
+   }
+    
+  #grid-1{
+  grid-template-columns:300px 80px 520px;
+   }
+     
+ #grid-2{
+  grid-template-columns:300px 80px 520px;
+   }
+     
+ #grid-3{
+  grid-template-columns:300px 80px 520px;
+   }
+     
+ #grid-4>div{
+ display:grid;
+  grid-template-columns:390px 390px 100px;
+  justify-content:center;
+  grid-column-gap:10px;
+  margin:10px 0;
+   }
+        
+  .post-header{
+     /*border:2px solid yellow;*/
+  }
+  
+  .post-header>p{
+     color:lightgreen;
+     font-size:40px;
+  }  
+  .post-input{
+   /*border:2px solid blue;*/
+  }
+  
+  #input-url{
+  border:4px solid lightgreen;
+  border-radius:10px;
+  color:lightgreen;
+  font-size:40px; 
+  background:none;
+  padding:6px;
+  width:900px;
+  }
+  
+  #input-choose{
+  border:4px solid lightgreen;
+  border-radius:10px;
+  color:lightgreen;
+  font-size:40px; 
+  background:none;
+  padding:4px;
+  width:200px;
+  }
+  
+  #input-header{
+  border:4px solid lightgreen;
+  border-radius:10px;
+  color:lightgreen;
+  font-size:40px; 
+  background:none;
+  padding:4px;
+  width:300px;
+  }
+    
+  #post-submit{
+  font-size:40px;
+  padding:10px 0;
+  text-align:center;
+  background:gold;
+  width:250px;
+  display:block;
+  margin:50px auto;
+  border-width:0;
+  border-radius:15px;
+  }
+  
+  #output-data{
+  margin:20px auto;
+  width:800px;
+  }
+  
+  #output-data>div{
+  width:800px;
+  border:4px solid lightgreen;
+  border-radius:20px;
+  background:none;
+  color:lightgreen;
+  font-size:30px;
+  padding:20px;
+  }  
+  
+  .input-value,.input-parameter{
+  border:4px solid lightgreen;
+  border-radius:10px;
+  color:lightgreen;
+  font-size:40px; 
+  background:none;
+  padding:10px;
+  }
+  
+  #add,.deletebox{
+  border:4px solid lightgreen;
+  border-radius:10px;
+  color:black;
+  font-size:60px; 
+  background:lightgreen;
+  padding:6px;
+  }
+  

@@ -1,0 +1,138 @@
+
+   #home{
+   display:block;
+   background:black;
+   margin:0 auto;
+   border:3px solid lightgreen;
+   border-radius:10px;
+   width:900px;
+   margin-bottom:20px;
+   }
+ 
+  #home>p{
+ background:lightgreen;
+  color:black;
+  font-size:55px;
+  padding-bottom:10px;
+  }
+  #home>table{
+   padding:10px;
+  }
+   #recent{
+   display:block;
+   background:black;
+   margin:10px auto;
+   border:3px solid lightgreen;
+   border-radius:10px;
+   width:900px;
+   margin-bottom:20px;
+   }
+ 
+  #recent>p{
+ background:lightgreen;
+  color:black;
+  font-size:55px;
+  padding-bottom:10px;
+  padding:5px;
+  }
+  
+  #recent-div{  
+   padding:10px;
+  display:grid;
+  grid-template-columns:400px 400px;
+  grid-column-gap:40px;
+  grid-row-gap:40px;
+  justify-content:center;
+  }
+  
+  .recent-div-info{
+   border:2px solid lightgreen;
+  width:400px;
+  height:300px;
+  }
+  
+  .recent-div-info>h3{
+  color:black;
+  font-size:40px;
+  text-align:center;
+  border-bottom:4px solid lightgreen;
+  background:lightgreen;
+  }
+  
+   .recent-div-info>img{
+   height:240px;
+   width:400px;
+   }
+  
+  .recent-div-info>p{
+  color:lightgreen;
+  font-size:40px;
+  text-align:center;
+  padding:20px;  
+  }
+                  
+ 
+  table{
+   diaplay:flex;
+   flex-direction:column;
+   align-items:center;
+  }
+  
+ 
+  .app-info{
+  padding:10px;
+  width:800px;
+  margin:20px auto;
+  border:2px solid lightgreen;
+  }
+  
+   @keyframes displaychange{
+   
+   from{transform:rotateY(0deg);}
+   
+   to{transform:rotateY(360deg);}
+   
+   }
+  
+  .app-img{ 
+  }
+  
+ .app-img>img{
+   animation-name:displaychange;
+   animation-duration:8s;
+   animation-iteration-count:infinite;
+   animation-delay:0s; 
+   display:block;
+   margin:0 auto;
+   width:300px;
+   height:300px; 
+  } 
+  
+  .app-dis{
+  border:4px solid lightgreen;
+  }
+  
+  .app-dis>p{
+  color:lightgreen;
+  font-size:40px;
+  padding:10px;
+  word-spacing:2px;
+  text-align:center;
+  word-spacing:3px;
+  font-weight:700;
+  }
+  
+  .app-start{
+  max-width:100%;
+  background:lightgreen;
+  }
+     
+    .app-start>a{
+    display:block;
+    font-size:40px;
+    text-align:center;
+    color:black;
+    padding:10px;
+    text-decoration:none;
+  }
+  

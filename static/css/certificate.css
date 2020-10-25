@@ -1,0 +1,102 @@
+   
+      #certificate{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      }
+      
+      .certificate-info{
+      padding:10px;
+      margin:10px;
+      border:10px solid lightgreen;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      }
+      
+      .certificate-img{
+      width:800px;
+      height:600;
+      border:8px inset gold;
+      }
+      
+      .certificate-btn{
+      width:800px; 
+      margin:8px 0;
+      }
+      
+      .certificate-btn-open{
+      width:150px;
+      float:left;
+      border:4px solid lightgreen;
+      color:lightgreen;
+      padding:10px;
+      text-align:center;
+      text-decoration:none;
+      font-size:35px;
+      }
+      
+      .certificate-btn-delete{
+      width:150px;
+      float:right;
+      border:4px solid lightgreen;
+      color:lightgreen;
+      padding:10px;
+      text-align:center;
+      text-decoration:none;
+      font-size:35px;
+      }
+      
+     .certificate-btn-open:hover{
+     background:lightgreen;
+     color:black;
+     }
+     
+     .certificate-btn-delete:hover{
+     background:lightgreen;
+     color:black;
+     }        
+     
+    #certificate-add{
+      padding:10px;
+      width:800px;
+      margin:0 auto;
+      }
+      
+      #certificate-add-div{
+      }      
+      
+     #certificate-add-div:hover>#certificate-add-form{
+     display:block;
+      }      
+      
+      #certificate-add-div>p{
+      display:inline;
+      font-size:80px;
+      color:black;
+      padding:5px;
+      background:lightgreen;
+      } 
+      
+      #certificate-add-form{
+      display:none;
+      border:4px solid lightgreen;
+      padding:10px;
+      margin:20px; 
+      }
+      
+       #certificate-add-form>input{
+       background:none;
+       width:500px;
+       color:lightgreen;
+       border:4px solid lightgreen;
+       border-radius:20px;
+       font-size:40px;
+       padding:10px;
+       margin:10px auto;
+       display:block;
+      }
+      
+       #certificate-add-form>input[type="submit"]{
+       width:250px;
+      }

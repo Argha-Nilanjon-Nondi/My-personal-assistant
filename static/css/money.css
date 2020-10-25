@@ -1,0 +1,162 @@
+
+     
+   #reminder-total{
+    width:800px;
+    margin:20px auto;
+    padding:0 20px;
+    border:8px solid lightgreen;
+   }
+   
+   #reminder-total>p{
+   text-align:center;
+   color:lightgreen;
+   font-size:60px;
+   font-weight:400;
+   }
+   
+   .reminder-item{
+   border:4px solid lightgreen;
+   padding:10px;
+   width:700px;
+   margin:20px auto;
+   }
+   
+   
+   .reminder-item>div{
+   margin:10px 0;
+   border:2px solid lightgreen;
+   padding:10px 5px;   
+   }
+   
+      
+    .reminder-item-heading>p{
+    color:lightgreen;
+    font-size:40px;
+    font-weight:400;
+    text-align:center;
+    }
+    
+     .reminder-item-endate>p{
+     color:lightgreen;
+    font-size:40px;
+    font-weight:400;
+    text-align:center;
+    }
+    
+    .reminder-item-evdate{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    }
+    
+    .reminder-item-evdate>p{
+     color:lightgreen;
+    font-size:40px;
+    font-weight:400;
+    text-align:center;    
+    }    
+    
+     .reminder-item-amount{
+     display:grid;
+     grid-template-columns:1fr 1fr;
+     }
+     
+     @keyframes rotateo{
+     
+     to{
+     
+     transform:rotateY(0deg);     
+     transform:rotateX(0deg);     
+     
+     }
+   
+     from{
+     
+        transform:rotateX(360deg);     
+        transform:rotateY(360deg);   
+     
+     } 
+     
+     }
+    
+    .reminder-item-amount>div{
+    width:50px;
+    height:50px;
+    margin:0 100px;
+    animation-name:rotateo;
+    animation-iteration-count:infinite;
+    animation-duration:0.5s;
+    }
+    
+    .reminder-item-amount>p{
+     color:lightgreen;
+    font-size:40px;
+    font-weight:400;
+    text-align:center;    
+    }
+    
+   
+  #reminder-add{
+  padding:5px;
+  margin:10px;
+  }
+  #reminder-add > p{
+  font-size:100px;
+  color:black;
+  border:2px solid silver;
+  display:inline;
+  padding:20px;
+   background:lightgreen;
+   margin:20px;
+  }
+  
+   #reminder-add:hover > #reminder-form{
+   display:block;
+   }
+   
+  #reminder-form{
+  display:none;
+  }
+  
+  #reminder-add > div > form{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  }
+  
+  #reminder-add > div > form > input,select{
+  border:4px solid lightgreen;
+  border-radius:20px;
+  width:500px;
+  padding:10px;
+  font-size:40px;
+  background:none;
+  color:lightgreen;
+  margin-top:20px;
+  }
+
+  #reminder-add > div > form > textarea{
+  border:8px solid lightgreen;
+  border-radius:20px;
+  width:800px;
+  padding:10px;
+  font-size:35px;
+  color:lightgreen;
+  margin-top:20px;
+  background:none;
+  }
+  
+  #reminder-add > div > form > input[type="submit"]{
+  width:250px;
+  border:4px solid lightgreen;
+  border-radius:20px;
+  padding:4px;
+  font-size:35px;
+  color:lightgreen;
+  margin-top:20px;
+  }
+  
+  #reminder > p{
+  font-size:40px;
+  color:lightgreen;
+  padding:10px;
+  }

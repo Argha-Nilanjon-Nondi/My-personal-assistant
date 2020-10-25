@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    
+   <link rel="stylesheet" href="/static/css/style.css">
+    <title>Reminder</title>
+    
+   <style>
+
+  /*main*/
+   </style>
+    
+  </head>
+  
+  <body>
+ 
+<!--Navbar starts-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+ <a class="navbar-brand custom-text" href="/home/">
+    <img src="/static/img/ai2.gif" width="30" height="30" class="d-inline-block align-top" alt="">
+    Avunix
+  </a>
+  <button class="navbar-toggler custom-text" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link custom-text" href="/home/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link custom-text dropdown-toggle custom-active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tools
+        </a>
+        <div class="dropdown-menu custom-bg custom-border" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item custom-text" href="/money/">Money recoder</a>
+          <div class="dropdown-divider custom-divider"></div>
+          <a class="dropdown-item custom-text custom-active" href="/reminder/">Reminder</a>
+          <div class="dropdown-divider custom-divider"></div>
+          <a class="dropdown-item custom-text" href="/trace/">Traceoute</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link custom-text" href="/certificate/">Certificate <span class="sr-only">(current)</span></a>
+      </li>
+            <li class="nav-item">
+        <a class="nav-link custom-text" href="/chatroom/">Chat Room <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+  <!-- Button trigger modal -->
+<a type="button" class="nav-link custom-text" data-toggle="modal" data-target="#exampleModal">
+  Logout
+</a>
+      </li>      
+    </ul>
+  </div>
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content custom-bg custom-border">
+      <div class="modal-header">
+        <h5 class="modal-title custom-text" id="exampleModalLabel">Logout</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom-text">
+        Logout if you want . Don't worry about data and records.
+      </div>
+      <div class="modal-footer custom-divider">
+        <button type="button" class="custom-modal-btn btn btn-secondary" data-dismiss="modal">Close</button>
+        <a type="button" href="/logout/" class="custom-modal-btn btn btn-primary">Logout me</a>
+      </div>
+    </div>
+  </div>
+</div>
+</nav>
+<!--Navbar ends-->
+  
+<!--Form starts-->
+<div class="container custom-bg custom-border py-2 my-3">
+
+<p>
+
+  <button class="btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Add Events
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body custom-bg custom-border">
+  
+  <div class="row justify-content-center">
+ 
+  <form action="/reminder/" method="post">
+  
+  <div class="form-group row">
+  
+    <div class="col-sm-12">
+      <input  type="datetime-local" class="form-control custom-bg custom-form-font custom-border" id="inputBookName" name="date" required>
+    </div>
+    
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-12">
+      <textarea class="form-control  custom-bg custom-form-font custom-border" id="inputAuthorName"  placeholder="Type the matter..." name="about"required></textarea>
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-12">
+      <button type="submit" class="btn btn-primary center-inline custom-submit-btn" id="action-on-press">Save Change</button>
+    </div>
+  </div>
+</form>    
+      
+      
+  </div>
+ </div>
+</div>
+
+</div>
+<!--Form ends-->
+<!--Table of money starts-->
+<div class="container custom-bg custom-border my-3">
+<div class="table-responsive">
+<table class="table">
+
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">About</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">Left</th>
+      <th scope="col">Button</th>
+    </tr>
+    </thead>
+ 
+  <tbody>
+  </tbody>
+</table>
+</div>
+</div>
+<!--Table of money ends-->
+  
+  
+   <script src="/static/js/jquery-3.5.1.slim.min.js" ></script>
+    <script src="/static/js/popper.min.js" ></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+  
+  <script type="text/javascript">
+  
+    try{
+  
+function main(data){
+
+function getRandomInt() { 
+         let min=0;
+         let max=99**9;
+         let rand = new  String(Math.floor(Math.random() * (max - min)) + min);
+          return rand
+      }
+
+    
+   function formatChange(data){
+    
+    let data2=data.split(":");
+    
+    let hour=Number(data2[0]);
+    
+    let format="";
+    
+    let minute=data2[1];
+    
+    if(((hour-12)>0)){
+    hour=hour-12;
+    format+="PM";
+    }
+    
+    else if(hour==0){
+    
+    hour="12"
+    format+="AM";
+    
+    }  
+      
+    else{
+    hour=String(hour);
+    format+="AM";
+    }
+    
+    let result=hour+":"+minute+"  "+format;
+    
+    return result;
+   }
+    
+
+  function between_time(text){
+      let dt1 = new Date();
+      let dt2 = new Date(text);
+      let res = Math.abs(dt2 - dt1) / 1000;
+      let days = Math.floor(res / 86400);
+      let hours = Math.floor(res / 3600) %24; 
+      let minutes = Math.floor(res / 60) %60;
+      let seconds = Math.floor(res % 60);
+      let real=`${days}:${hours}:${minutes}:${seconds}`;;
+      if(dt2-dt1<0){var tr_color=true;}
+      else{var tr_color=false;}
+      
+   return [real,tr_color];
+
+  }
+  
+  
+  function maker(list){
+  
+   
+  let tr=document.querySelector(".table>tbody");
+
+  
+  var html_tr_code=``;
+  
+  
+  let row= list;
+  
+  row.forEach((element)=>{
+  
+  let about=element[0];
+    
+  let date=(element[1].split(" "))[0];
+
+  let time = formatChange((element[1].split(" "))[1]);
+  
+  let check_date=between_time(element[1]);
+ let left_time= check_date[0];
+ 
+ let no=`href="/reminder/delete/${element[2]}"`;
+ 
+ let random_num=getRandomInt();
+ 
+ //${add_class}
+ if(check_date[1]==true){
+  var add_style=` style="color:yellow !important;" `;
+ }
+ 
+ else{
+ var add_style=` style="color:orange !important;" `; 
+ }
+ 
+ //alert(add_class);
+ 
+ html_tr_code+=`
+  
+   <tr>
+    <td>${about}</td>
+    <td>${date}</td>
+     <td>${time}</td>
+   <td>${left_time}</td>
+     <td><button type="button" class="nav-link custom-text custom-bg custom-border" ${add_style} data-toggle="modal" data-target="#exampleModal-${random_num}">
+  Delete Me
+</Button></td>
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal-${random_num}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content custom-bg custom-border">
+      <div class="modal-header">
+        <h5 class="modal-title custom-text" id="exampleModalLabel">Remove event</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom-text">
+        Are you sure to delete "${about}" event ?
+      </div>
+      <div class="modal-footer custom-divider">
+        <button type="button" class="custom-modal-btn btn btn-secondary" data-dismiss="modal">Close</button>
+        <a type="button" ${no} class="custom-modal-btn btn btn-primary">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+   </tr>
+
+   `;  
+ 
+      
+  });
+  
+  //alert(html_tr_code);
+  
+    tr.innerHTML=html_tr_code;
+    html_tr_code="";
+  
+  }
+  
+ // maker([["study","05/21/2022 12:09:45 PM"]])
+
+maker(data);
+ 
+  setInterval(maker,30000,data);
+  
+    } 
+    
+    
+ 
+  
+  
+  async function getData(url){
+  
+  let params={method:"post"};
+  
+  const domain=await fetch(url,params);
+  
+  let data = await domain.json();
+  
+  return data.data;
+  
+  }
+  
+  getData("/reminder/data/").then((data)=>{
+  
+   main(data);
+  
+  }).catch((ee)=>{
+  
+   alert(ee.name +" ===> "+ee.message)
+  
+  //alert("There is a problem in your network");
+  
+  });
+  
+    }
+    
+   
+    
+    catch(a){
+    alert(a.name+" "+a.message)
+    }  
+
+ </script>
+  
+  </body>
+  
+</html>
+	
