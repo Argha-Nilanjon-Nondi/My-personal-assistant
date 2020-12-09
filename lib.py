@@ -3,6 +3,7 @@ import os
 import datetime
 import builtwith
 from sqlite_easy import easy as sql 
+from block_chain.block import Block
 
 BASE_DIR = os.getcwd()
 users_dir=os.path.join(BASE_DIR, 'users')
@@ -72,7 +73,13 @@ class CreatAccount:
 			codes=[
 			"""CREATE TABLE "reminder" ("about" TEXT Not null , "time" TEXT Not null , "no" int Not null   Primary Key);"""
 			,
-			"""CREATE TABLE "money" ("about" TEXT, "entery_date" TEXT Not null, "event_date" TEXT Not null  , "amount" INTEGER Not null , "status" TEXT Not null, "no" int Not null   Primary Key )
+			"""CREATE TABLE "money" ("about" TEXT, 
+"hash" TEXT Not null,
+"previous_hash" TEXT Not null,
+"entery_date" TEXT Not null, "event_date" TEXT Not null  , 
+"amount" INTEGER Not null , 
+"status" TEXT Not null, 
+"no" int Not null   Primary Key )
 			""",
 			"""CREATE TABLE "certificate" ("no" INTEGER Not null  Primary Key , "img_name" TEXT Not null , "url" TEXT Not null )
 			""",
@@ -100,7 +107,7 @@ CREATE TABLE "music" ("no" INTEGER Not null  Primary Key , "music" TEXT Not null
 
 
 
-#obj=CreatAccount("pcic095@gmail.com","Argha Nilanjon Nondi","9143")
+#obj=CreatAccount("pcic090@gmail.com","Argha Sharker","9143")
 #print(obj.create())
 
 
@@ -198,13 +205,13 @@ class Money:
 	def show_data(self):
 		data=[]
 		code = """
-		Select about,entery_date,event_date,status,amount from money;
+		Select about,entery_date,event_date,status,amount,previous_hash,hash from money;
 		"""
 		os.chdir(users_dir)
 		record=sql.sqlite_run(self.database,code)
 		record.reverse()
 		for i in record:
-			data.append([i[0],i[1],i[2],i[3],i[4]])
+			data.append([i[0],i[1],i[2],i[3],i[4],i[5],i[6]])
 			
 		return data
 		
@@ -233,19 +240,73 @@ class Money:
 		if(len(no)==0):
 			no="1"
 		else:
-			no=str(no[0][0]+1)		
+			no=str(no[0][0]+1)
+		
+		previous_hash=sql.sqlite_run(self.database,"""SELECT hash FROM money ORDER BY hash DESC LIMIT 1;""")[0][0]
+		
+		print(previous_hash)
+		
+		blo=Block()
+		
+		blo.data={"about":self.about,"time":time,"status":self.status,"amount":self.amount }
+		
+		blo.ts=self.today
+		blo.ph=previous_hash
 			
 		try:
-			sql.db_insert(self.database,"money",[["about",self.about],["entery_date",self.today],["event_date",time],["status",self.status],["amount",self.amount],["no",no]])
+			sql.db_insert(self.database,"money",[
+			["about",self.about],          ["entery_date",self.today],
+			["event_date",time],
+			["status",self.status],
+			["amount",self.amount],
+			["no",no],
+			["hash",blo.mh()],
+			["previous_hash",previous_hash]
+			])
 		except Exception as a:
 			print(a)
+			
+	@property
+	def check_validation(self):
+		chain=self.show_data.copy()
+		chain.reverse()
 		
+		for i in range(1,len(chain)):
+			main=chain[i-1:i+1]
+			print(main)
+			previous=main[0]
+			current=main[1]
+			
+			if(current[-2]!=previous[-1]):
+				#print(current[-2],previous[-2],sep="  ")
+				return False
+			
+			blo2=Block()
+			
+			blo2.ts=current[1]
+			blo2.ph=current[-2]
+			blo2.data={"about":current[0],"time":current[1],"status":current[3],"amount":current[4] }
+			
+			print(blo2.data)
+							
+			if(current[-1]!=blo2.mh()):
+				print(current[-1],blo2.mh(),sep="==")
+				print("data ",current[1])
+				print("error")
+				return False
+				
+			else:
+				print("C")
+			
+		return True
 
-"""
-obj=Money("30345821341")
-obj.input_data(sub,ev_date,amount,status)					
-print(obj.show_data)
-"""
+if __name__=="__main__":
+	obj=Money("395463574649")
+	for i in range(0,1):
+		#obj.input_data("Hello"+str(i),"2020-9-12T20:26",99+i,"0")
+		pass
+	print(obj.check_validation)
+
 
 
 class Certificate:
