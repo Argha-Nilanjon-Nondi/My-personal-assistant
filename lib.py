@@ -242,8 +242,7 @@ class Money:
 		else:
 			no=str(no[0][0]+1)
 		
-		previous_hash=sql.sqlite_run(self.database,"""SELECT hash FROM money ORDER BY hash DESC LIMIT 1;""")[0][0]
-		
+		previous_hash=sql.sqlite_run(self.database,"""SELECT hash FROM money order by no desc  limit 1;""")[0][0]
 		print(previous_hash)
 		
 		blo=Block()
@@ -272,37 +271,41 @@ class Money:
 		chain.reverse()
 		
 		for i in range(1,len(chain)):
-			main=chain[i-1:i+1]
-			print(main)
-			previous=main[0]
-			current=main[1]
 			
-			if(current[-2]!=previous[-1]):
-				#print(current[-2],previous[-2],sep="  ")
-				return False
+			previous=chain[i-1]
+			current=chain[i]
 			
-			blo2=Block()
+			#current block info start
+			cu_about=current[0]
+			cu_hash=current[6]
+			cu_phash=current[5]
+			cu_enterdate=current[1]
+			cu_eventdate=current[2]
+			cu_amount=current[4]
+			cu_status=current[3]
+			#current block info end
 			
-			blo2.ts=current[1]
-			blo2.ph=current[-2]
-			blo2.data={"about":current[0],"time":current[1],"status":current[3],"amount":current[4] }
+			#previous block info start
+			pre_hash=previous[6]
+			#previous block info start
 			
-			print(blo2.data)
-							
-			if(current[-1]!=blo2.mh()):
-				print(current[-1],blo2.mh(),sep="==")
-				print("data ",current[1])
-				print("error")
+			block=Block()
+			block.data={"about":cu_about,"time":cu_eventdate,"status":cu_status,"amount":cu_amount }
+			block.ts=cu_enterdate
+			block.ph=cu_phash
+			
+			if(cu_hash!=block.mh()):
 				return False
 				
-			else:
-				print("C")
+			if(pre_hash!=cu_phash):
+				return False
 			
 		return True
+	
 
 if __name__=="__main__":
 	obj=Money("395463574649")
-	for i in range(0,1):
+	for i in range(0,4):
 		#obj.input_data("Hello"+str(i),"2020-9-12T20:26",99+i,"0")
 		pass
 	print(obj.check_validation)
