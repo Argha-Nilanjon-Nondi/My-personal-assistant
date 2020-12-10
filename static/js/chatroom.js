@@ -92,7 +92,7 @@
   
   alert(e);
   
-  });   
+  }); 
 
 
     /*form of msg enter start*/
@@ -102,7 +102,7 @@
        
         e.preventDefault();
         
-       en_u2=enter_url+msg.value+`/`;
+      let en_u2=enter_url+msg.value+`/`;
 
   getData(en_u2).then((data)=>{
  

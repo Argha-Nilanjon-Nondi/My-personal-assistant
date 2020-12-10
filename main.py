@@ -262,7 +262,7 @@ def chat_enter(own,other,msg):
 		if(session["status"]=="logged"):
 			obj=lib.ChatRoom(own,other);
 			obj.send_msg(msg);			
-			return "True";
+			return "true";
 	else:
 		return redirect("/")												
 """
