@@ -97,6 +97,18 @@ CREATE TABLE "music" ("no" INTEGER Not null  Primary Key , "music" TEXT Not null
 			]
 			for x in codes:
 				sql.sqlite_run(self.db,x)
+
+			sql.db_insert(self.db,"money",[
+			["about","AAAAA"],
+			["hash","000040d6883880da2a96fce37c89d449fcc2666c5bfb96c73c368cacab1bf091"],
+			["previous_hash","AAAAAAA"],
+			["entery_date","00/00/00"],
+			["event_date","00/00/00"],
+			["amount",0],
+			["status","1"],
+			["no","1"]
+			])
+			
 			os.chdir(BASE_DIR+r"/static/"+r"/users/")
 			os.mkdir(self.db)
 			os.chdir(BASE_DIR+r"/static/"+r"/users/"+self.db)
@@ -107,7 +119,7 @@ CREATE TABLE "music" ("no" INTEGER Not null  Primary Key , "music" TEXT Not null
 
 
 
-#obj=CreatAccount("pcic090@gmail.com","Argha Sharker","9143")
+#obj=CreatAccount("pcic087@gmail.com","Argha Sharker","9143")
 #print(obj.create())
 
 
@@ -304,11 +316,11 @@ class Money:
 	
 
 if __name__=="__main__":
-	obj=Money("395463574649")
+	obj=Money("103026954054")
 	for i in range(0,4):
-		#obj.input_data("Hello"+str(i),"2020-9-12T20:26",99+i,"0")
-		pass
-	print(obj.check_validation)
+		obj.input_data("Hello"+str(i),"2020-9-12T20:26",99+i,"0")
+		#pass
+	#print(obj.check_validation)
 
 
 

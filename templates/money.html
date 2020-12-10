@@ -169,9 +169,9 @@
 <!--Table of money ends-->
    
   
-      <script src="/static/js/jquery-3.5.1.slim.min.js" ></script>
+  <script src="/static/js/jquery-3.5.1.slim.min.js" ></script>
     <script src="/static/js/popper.min.js" ></script>
-    <script src="/static/js/bootstrap.min.js"></script>
+     <script src="/static/js/bootstrap.min.js"></script>
   
   <script type="text/javascript">
   
@@ -290,7 +290,11 @@
   
   getData("/money/data/").then((data)=>{
   
-   money_lister(data);
+  let mul_data=data.slice(0,data.length-1)
+  
+  console.log(mul_data)
+  
+   money_lister(mul_data);
   
   }).catch(()=>{
   
