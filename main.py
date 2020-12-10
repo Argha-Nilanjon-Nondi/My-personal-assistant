@@ -256,12 +256,14 @@ def chat_talk(own,other):
 	else:
 		return redirect("/")		
 		
-@app.route("/chat_me/enter/<own>/<other>/<msg>/",methods=["GET","POST"])
-def chat_enter(own,other,msg):
+@app.route("/chat_me/enter/<own>/<other>/",methods=["GET","POST"])
+def chat_enter(own,other):
 	if("status" in session):
 		if(session["status"]=="logged"):
-			obj=lib.ChatRoom(own,other);
-			obj.send_msg(msg);			
+			msg=request.form["body"]
+			print(msg)
+			#obj=lib.ChatRoom(own,other);
+			#obj.send_msg(msg);			
 			return "true";
 	else:
 		return redirect("/")												

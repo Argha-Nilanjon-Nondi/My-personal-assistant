@@ -102,9 +102,11 @@
        
         e.preventDefault();
         
-      let en_u2=enter_url+msg.value+`/`;
+      let en_u2=enter_url;
 
-  getData(en_u2).then((data)=>{
+  getData(en_u2,
+  {"body": JSON.stringify({msg:"xx"})}
+  ).then((data)=>{
  
   
   }).catch((e)=>{
