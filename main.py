@@ -105,7 +105,18 @@ def money_data():
 			return data
 	else:
 		return redirect("/")
-		
+
+@app.route("/money/validation/",methods=["GET","POST"])
+def money_validation_data():
+	if("status" in session):
+		if(session["status"]=="logged"):
+			obj=lib.Money(session["dbid"])
+			data=obj.check_validation
+			data={"data":data}
+			return data
+	else:
+		return redirect("/")		
+						
 @app.route("/reminder/data/",methods=["GET","POST"])
 def reminder_data():
 	if("status" in session):

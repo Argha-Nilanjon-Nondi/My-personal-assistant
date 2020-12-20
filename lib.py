@@ -119,7 +119,7 @@ CREATE TABLE "music" ("no" INTEGER Not null  Primary Key , "music" TEXT Not null
 
 
 
-#obj=CreatAccount("pcic087@gmail.com","Argha Sharker","9143")
+#obj=CreatAccount("pcic095@gmail.com","Argha Nilanjon Nondi","9143")
 #print(obj.create())
 
 
@@ -302,25 +302,23 @@ class Money:
 			#previous block info start
 			
 			block=Block()
-			block.data={"about":cu_about,"time":cu_eventdate,"status":cu_status,"amount":cu_amount }
+			block.data={"about":cu_about,"time":cu_eventdate,"status":cu_status,"amount":str(cu_amount) }
 			block.ts=cu_enterdate
 			block.ph=cu_phash
 			
 			if(cu_hash!=block.mh()):
-				return False
+				return "false"
 				
 			if(pre_hash!=cu_phash):
-				return False
-			
-		return True
+				return "false"
+		
+					
+		return "true"
 	
 
 if __name__=="__main__":
-	obj=Money("103026954054")
-	for i in range(0,4):
-		obj.input_data("Hello"+str(i),"2020-9-12T20:26",99+i,"0")
-		#pass
-	#print(obj.check_validation)
+	obj=Money("44606575922")
+	print(obj.check_validation)
 
 
 

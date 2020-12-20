@@ -87,11 +87,11 @@
 
 <p>
 
-  <button class="btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  <button class="btn" type="button" data-toggle="collapse" data-target="#collapseMoney" aria-expanded="false" aria-controls="collapseExample">
     Add money
   </button>
 </p>
-<div class="collapse" id="collapseExample">
+<div class="collapse" id="collapseMoney">
   <div class="card card-body custom-bg custom-border">
   
   <div class="row justify-content-center">
@@ -136,6 +136,28 @@
 </div>
 <!--Form ends-->
 
+
+
+
+<!--Validation starts-->
+<div class="container custom-bg custom-border py-2 my-3">
+
+<p>
+
+  <button class="btn" type="button" expanded="true" id="block-check-btn">
+    Check Validation
+  </button>
+</p>
+  <div class="card card-body custom-bg custom-border">
+  
+  <div class="row justify-content-center" id="block-validation">
+      <p class="card-text custom-text" id="total">Opetation has not started yet .</p>
+  </div>
+ </div>
+
+
+</div>
+<!--Validation ends-->
 
 
 <!--Total money start-->  
@@ -302,6 +324,39 @@
   
   });
   
+  
+  let block_check=document.getElementById("block-validation");
+
+  let block_check_btn=document.getElementById("block-check-btn");
+  
+  block_check_btn.addEventListener("click",()=>{
+  
+  block_check.innerHTML=`
+      <p class="card-text custom-text" id="total" style="color:orange !important;">Operation has started . Wait for a while .......</p>`;
+ 
+  getData("/money/validation/").then((data)=>{
+  
+     if(data=="true"){
+     
+  block_check.innerHTML=`
+      <p class="card-text custom-text" id="total" style="color:yellow !important;">Your block is valid</p>`;
+           
+     }
+     
+   if(data=="false"){
+  block_check.innerHTML=`
+      <p class="card-text custom-text" id="total" style="color:red !important;">Your block is invalid</p>`;
+                
+     }
+  
+  }).catch(()=>{
+  
+  block_check.innerHTML=`
+      <p class="card-text custom-text" id="total" style="color:red !important;">You have some trouble . Try again .</p>`;
+        
+  });
+  
+  });
   
     }
     
