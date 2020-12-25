@@ -1,13 +1,16 @@
 import lib
 import os
 import random
+from validation import Validation
+from datetime import timedelta
 from flask import *
 app=Flask(__name__)
 app.debug=True
 app.secret_key="r9ruchrh0dh30rjro"
+app.permanent_session_lifetime = timedelta(minutes=3000)
 app.host="0.0.0.0"
 BASE_DIR = os.getcwd()
-
+validated=Validation()
 
 @app.route("/home/")
 def home():
@@ -28,13 +31,17 @@ def login():
 		email=request.form["email"]
 		password=request.form["password"]
 		
+		if(validated.checkValue(None,email,password) or validated.checkValue("",email,password)):
+			return redirect("/")
+		
 		obj=lib.Login(email,password)
 		value=obj.check
 		if (value[0]==True):
-			session["status"]="logged"
-			session["username"]=value[1]
-			session["dbid"]=value[2]
-			return redirect("/home/")
+		  session.permanent = True
+		  session["status"]="logged"
+		  session["username"]=value[1]
+		  session["dbid"]=value[2]
+		  return redirect("/home/")
 		else:
 			code="""
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -63,6 +70,10 @@ def money():
 				amount=request.form["amount"]
 				status=request.form["status"]
 				about=request.form["about"]
+				
+				if(validated.checkValue(None,date,amount,status,about) or validated.checkValue("",date,amount,status,about)):
+					return redirect("/")
+			
 				obj.input_data(about,date,amount,status)
 				return render_template("money.html")
 				
@@ -84,8 +95,11 @@ def reminder():
 			if request.method=="POST":
 				
 				date=request.form["date"]
-				print(date)
 				about=request.form["about"]
+				
+				if(validated.checkValue(None,date,about) or validated.checkValue("",date,about)):
+									return redirect("/")
+									
 				obj.input_data(about,date)
 							
 				return render_template("reminder.html")			
@@ -127,9 +141,6 @@ def reminder_data():
 			return data
 	else:
 		return redirect("/")	
-		
-		
-
 										
 @app.route("/certificate/data/",methods=["GET","POST"])
 def certificate_data():
@@ -149,6 +160,10 @@ def reminder_delete(no):
 	if("status" in session):
 		if(session["status"]=="logged"):
 			obj=lib.Reminder(session["dbid"])
+			
+			if(validated.checkValue(None,no) or validated.checkValue("",no)):
+				return redirect("/")
+				
 			obj.delete(str(no))
 			return redirect("/reminder/")	
 	else:
@@ -164,6 +179,9 @@ def certificate():
 				url=request.form["url"]
 				image=request.files["image"]
 				
+				if(validated.checkValue(None,url,image) or validated.checkValue("",url,image)):
+								return redirect("/")
+								
 				random_file_name=str(random.randrange(7007))+str(random.randrange(706607))+str(random.randrange(78907))+".pdf"
 				
 				users_dir=os.path.join(BASE_DIR,"static","users",session["dbid"],"certificate")
@@ -180,18 +198,16 @@ def certificate():
 	else:
 		return redirect("/")
 
-		
-				
-							
-
 @app.route("/certificate/delete/<int:no>/",methods=["POST","GET"])
 def certificate_delete(no):
 	no=no
 	if("status" in session):
 		if(session["status"]=="logged"):
-			obj=lib.Certificate(session["dbid"])
-			obj.delete(str(no))
-			return redirect("/certificate/")	
+				if(validated.checkValue(None,no) or validated.checkValue("",no)):
+					return redirect("/")			
+		obj=lib.Certificate(session["dbid"])			
+		obj.delete(str(no))
+		return redirect("/certificate/")	
 	else:
 		return redirect("/")	
 
@@ -217,6 +233,8 @@ def trace_data():
 	if("status" in session):
 		if(session["status"]=="logged"):
 			url=request.args.get("url");
+			if(validated.checkValue(None,url) or validated.checkValue("",url)):
+				return redirect("/")			
 			obj=lib.Traceoute(url)
 			return obj.find;
 	else:
@@ -252,15 +270,20 @@ def chatroom():
 		
 @app.route("/chat_me/<id>/<name>/",methods=["GET","POST"])
 def chat_me(id,name):
-	if("status" in session):
-		if(session["status"]=="logged"):
-			return render_template("chat_me.html",id=id,name=name)
-	else:
-		return redirect("/")		
+  if(validated.checkValue(None,id,name) or validated.checkValue("",id,name)):
+    return redirect("/")
+  if("status" in session):
+    if(session["status"]=="logged"):
+      return render_template("chat_me.html",id=id,name=name)
+  else:
+    return redirect("/")		
 		
 @app.route("/chat_me/talk/<own>/<other>/",methods=["GET","POST"])
 def chat_talk(own,other):
+	if(validated.checkValue(None,own,other) or validated.checkValue("",own,other)):
+		return redirect("/")
 	if("status" in session):
+		if(session["status"]=="logged"):
 			obj=lib.ChatRoom(own,other)
 			data={"data":obj.show_msg()}
 			return data
@@ -269,6 +292,8 @@ def chat_talk(own,other):
 		
 @app.route("/chat_me/enter/<own>/<other>/<msg>/",methods=["GET","POST"])
 def chat_enter(own,other,msg):
+	if(validated.checkValue(None,own,other,msg) or validated.checkValue("",own,other,msg)):
+		return redirect("/")
 	if("status" in session):
 		if(session["status"]=="logged"):
 			obj=lib.ChatRoom(own,other);
