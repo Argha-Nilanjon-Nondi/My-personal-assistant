@@ -138,6 +138,26 @@
 
 
 
+<!--Signature starts-->
+<div class="container custom-bg custom-border py-2 my-3">
+
+<p>
+
+  <button class="btn" type="button" expanded="true" id="signature-get-btn">
+    Signature
+  </button>
+</p>
+  <div class="card card-body custom-bg custom-border">
+  
+  <div class="row justify-content-center" id="show-signature">
+      <p class="card-text custom-text">Opetation has not started yet .</p>
+  </div>
+ </div>
+
+
+</div>
+<!--Signature ends-->
+
 
 <!--Validation starts-->
 <div class="container custom-bg custom-border py-2 my-3">
@@ -324,6 +344,7 @@
   
   });
   
+  /*block-validation started*/
   
   let block_check=document.getElementById("block-validation");
 
@@ -357,6 +378,39 @@
   });
   
   });
+  
+   /*block-validation end*/
+   
+   
+  /*getting show-signature started*/
+  
+  let get_signature=document.getElementById("show-signature");
+
+  let get_signature_btn=document.getElementById("signature-get-btn");
+  
+  get_signature_btn.addEventListener("click",()=>{
+  
+  get_signature.innerHTML=`
+      <p class="card-text custom-text" id="total" style="color:orange !important;">Operation has started . Wait for a while .......</p>`;
+ 
+  getData("/money/signature/").then((data)=>{
+  
+     
+  get_signature.innerHTML=`
+      <p class="card-text custom-text" id="total" style="color:yellow !important;">${data}</p>`;
+     
+
+  
+  }).catch(()=>{
+  
+  block_check.innerHTML=`
+      <p class="card-text custom-text" id="total" style="color:red !important;">You have some trouble . Try again .</p>`;
+        
+  });
+  
+  });
+  
+   /*getting show-signature end*/
   
     }
     

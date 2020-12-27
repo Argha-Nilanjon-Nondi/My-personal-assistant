@@ -16,6 +16,7 @@
    .custom-text,th{
      color:lightgreen !important;
      font-size:1.3em !important;
+     word-wrap:break-all !important;
    }
    
    .custom-border{

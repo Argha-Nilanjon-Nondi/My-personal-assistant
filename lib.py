@@ -314,11 +314,20 @@ class Money:
 		
 					
 		return "true"
-	
+		
+	@property
+	def show_signature(self):
+		code = """
+		Select hash FROM money Order By no DESC LIMIT 1;
+		"""
+		os.chdir(users_dir)
+		record=sql.sqlite_run(self.database,code)
+		data=record[0][0]
+		return data[0:20]	
 
 if __name__=="__main__":
 	obj=Money("44606575922")
-	print(obj.check_validation)
+	print(obj.show_signature)
 
 
 

@@ -119,6 +119,17 @@ def money_data():
 			return data
 	else:
 		return redirect("/")
+		
+@app.route("/money/signature/",methods=["GET","POST"])
+def money_signature():
+	if("status" in session):
+		if(session["status"]=="logged"):
+			obj=lib.Money(session["dbid"])
+			data=obj.show_signature
+			data={"data":data}
+			return data
+	else:
+		return redirect("/")
 
 @app.route("/money/validation/",methods=["GET","POST"])
 def money_validation_data():
