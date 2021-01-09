@@ -69,6 +69,7 @@
    
    .custom-btn{
      background-color:yellow !important;
+     word-break:break-all !important;
    }
    
    .custom-active{

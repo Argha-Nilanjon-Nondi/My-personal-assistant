@@ -4,13 +4,17 @@ import random
 from validation import Validation
 from datetime import timedelta
 from flask import *
+
+
 app=Flask(__name__)
 app.debug=True
 app.secret_key="r9ruchrh0dh30rjro"
 app.permanent_session_lifetime = timedelta(minutes=3000)
 app.host="0.0.0.0"
-BASE_DIR = os.getcwd()
+BASE_DIR =os.path.join(os.getcwd(), 'avunix_assistant_web')
 validated=Validation()
+
+
 
 @app.route("/home/")
 def home():
@@ -323,4 +327,4 @@ def home():
 		return redirect("/")
 """
 if __name__=="__main__":
-	app.run(host="0.0.0.0")
+	app.run()

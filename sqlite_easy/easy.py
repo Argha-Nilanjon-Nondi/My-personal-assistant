@@ -45,7 +45,7 @@ def db_insert(db_name,table_name,list):
 	values=values[0:-1]
 	
 	conn = sqlite3.connect(db_name+'.db')
-	conn.execute("INSERT INTO "+table_name+" ("+row+") VALUES ( "+values+")")
+	conn.execute("INSERT INTO "+"'"+table_name+"'"+" ("+row+") VALUES ( "+values+")")
 	conn.commit()
 	conn.close()
 
