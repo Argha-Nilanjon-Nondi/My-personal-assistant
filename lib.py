@@ -5,14 +5,16 @@ import builtwith
 from sqlite_easy import easy as sql
 from block_chain.block import Block
 
-BASE_DIR = os.path.join(os.getcwd(), 'avunix_assistant_web')
-users_dir = os.path.join(BASE_DIR, 'users')
-
+#BASE_DIR = os.path.join(os.getcwd(), 'avunix_assistant_web')
+BASE_DIR ="""F:\\argha nondi\\codding\\avunix_assistant_web\\"""
+#print(BASE_DIR)
+users_dir = """F:\\argha nondi\\codding\\avunix_assistant_web\\users\\"""
+#print(users_dir)
 
 def user_single(dbid):
-    return os.path.join(users_dir, dbid)
+    return users_dir+"""{0}""".format(dbid)
 
-
+print(user_single("00000"))
 # print(sql.sqlite_run("12355525355money",""" SELECT * from money_all """))
 
 class Login:
@@ -250,19 +252,34 @@ class Money:
 
             sql.db_insert("money",id, [
                 ["about","AAAAAAAA"],
-                ["entery_date","2021-01-09"],
+                ["entery_date","2021-01-10"],
                 ["event_date","1000/1/1 12:0:00"],
                 ["status",0],
                 ["amount", 0],
                 ["no", 1],
-                ["hash","db57df0c57be78d9a28a72bb66781a9b766474de6e0b8d410a77dec0b7f97a95"],
+                ["hash","7e51e0a656a0805298ddf453ea1a2a714a2ba5362df89ad9f498a670a4ab1911"],
                 ["previous_hash","AAAAAAA"]
             ])
 
+            return "true"
+
         except Exception as a:
             print(a)
+            return "false"
 
-    def show_data(self, table_name):
+    def show_databases_data(self):
+        data = []
+        user_dir_single = user_single(self.database)
+        os.chdir(user_dir_single)
+        code = """Select no,id,name from datas;"""
+        record = sql.sqlite_run("money", code)
+        print((record))
+        record.reverse()
+        for i in record:
+            data.append([i[0], i[1], i[2]])
+        return data
+
+    def show_single_data(self, table_name):
         data = []
         user_dir_single = user_single(self.database)
         os.chdir(user_dir_single)
@@ -303,19 +320,20 @@ class Money:
         print(no)
 
         previous_hash = sql.sqlite_run("money", """SELECT hash FROM '{0}' order by no desc  limit 1;""".format(table_name))[0][0]
-        #previous_hash="AAAAAAAA"
+        #previous_hash="AAAAAAA"
         print(previous_hash)
 
         blo = Block()
 
-        blo.data = {"about": self.about, "time": time, "status": self.status, "amount": self.amount}
+        blo.data = {"about": self.about, "time": time, "status":self.status, "amount": self.amount}
 
         blo.ts = self.today
         blo.ph = previous_hash
 
         try:
             sql.db_insert("money", table_name, [
-                ["about", self.about], ["entery_date", self.today],
+                ["about", self.about],
+                ["entery_date", self.today],
                 ["event_date", time],
                 ["status", self.status],
                 ["amount",self.amount],
@@ -327,7 +345,7 @@ class Money:
             print(a)
 
     def check_validation(self, table_name):
-        chain = self.show_data(table_name).copy()
+        chain = self.show_single_data(table_name).copy()
         chain.reverse()
 
         for i in range(1, len(chain)):
@@ -350,15 +368,21 @@ class Money:
             # previous block info start
 
             block = Block()
-            block.data = {"about": cu_about, "time": cu_eventdate, "status": cu_status, "amount": cu_amount}
+            block.data = {
+                "about": cu_about,
+                "time": cu_eventdate,
+                "status":cu_status,
+                "amount":cu_amount}
             block.ts = cu_enterdate
             block.ph = cu_phash
-            print(block.mh())
+            print(block.ph,block.ts,block.mh(),sep="\n")
+
+
             if (cu_hash != block.mh()):
-                print("Erreor")
                 return "false"
 
             if (pre_hash != cu_phash):
+                print("err")
                 return "false"
 
         return "true"
@@ -375,11 +399,12 @@ class Money:
         return data[0:20]
 
 
-
-obj = Money("173411886783")
-#obj.add_table("hacktaberfest")
-#obj.input_data("368461493619","AAAAAAAA","1000-01-01T12:00",0,0)
-print(obj.check_validation("368461493619"))
+#input=7e51e0a656a0805298ddf453ea1a2a714a2ba5362df89ad9f498a670a4ab1911
+# obj = Money("158624666524")
+# # obj.add_table("hacktaberfestpopo")
+# # print(obj.show_databases_data())
+# obj.input_data(table_name="16261208982",about="AAAAAiyhlukAAA",time="1000-01-01T12:00",amount=0,status=0)
+# print(obj.check_validation("16261208982"))
 
 
 # 	#print(obj.show_signature)
@@ -392,22 +417,24 @@ class Certificate:
     def input_data(self, img_name, url):
         self.img_name = img_name
         self.url = r"""{0}""".format(url)
-        os.chdir(users_dir)
+
+        user_dir_single = user_single(self.database)
+        os.chdir(user_dir_single)
 
         code = "SELECT no FROM certificate ORDER BY no DESC LIMIT 1;"
 
-        os.chdir(users_dir)
-
-        no = sql.sqlite_run(self.database, code)
+        no = sql.sqlite_run("certificate", code)
         if (len(no) == 0):
             no = "1"
         else:
             no = str(no[0][0] + 1)
 
         try:
-            sql.db_insert(self.database, "certificate", [["url", self.url], ["img_name", self.img_name], ["no", no]])
+            sql.db_insert("certificate", "certificate", [["url", self.url], ["img_name", self.img_name], ["no", no]])
+            return "true"
         except Exception as a:
             print(a)
+            return "false"
 
     def delete(self, no):
 
@@ -415,17 +442,16 @@ class Certificate:
 
         code = "SELECT no FROM certificate;"
 
-        os.chdir(users_dir)
+        user_dir_single = user_single(self.database)
+        os.chdir(user_dir_single)
 
-        record = sql.sqlite_run(self.database, code)
+        record = sql.sqlite_run("certificate", code)
 
         if (self.no in record):
 
-            os.chdir(users_dir)
-
             print(str((self.no)[0]))
 
-            sql.row_delet(self.database, "certificate", "no", str((self.no)[0]))
+            sql.row_delet("certificate", "certificate", "no", str((self.no)[0]))
 
         else:
             pass
@@ -433,11 +459,10 @@ class Certificate:
     @property
     def show_data(self):
         data = []
-        code = """
-		Select url,img_name,no from certificate;
-		"""
-        os.chdir(users_dir)
-        record = sql.sqlite_run(self.database, code)
+        user_dir_single = user_single(self.database)
+        os.chdir(user_dir_single)
+        code = """Select url,img_name,no from certificate;"""
+        record = sql.sqlite_run("certificate", code)
         record.reverse()
         for i in record:
             data.append([i[0], i[1], i[2]])
@@ -445,7 +470,7 @@ class Certificate:
         return data
 
 
-# obj=Certificate("686110382554")
+# obj=Certificate("158624666524")
 # obj.input_data("hello.png","http//5869.889;png")
 # obj.delete(2)
 

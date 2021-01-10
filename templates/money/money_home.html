@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstarp/bootstrap.min.css">
+    
+   <link rel="stylesheet" href="/static/css/style.css">
+    <title>Money</title>
+    
+   <style>
+
+  /*main*/
+   </style>
+    
+  </head>
+  
+  <body>
+  <!--Navbar starts-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+ <a class="navbar-brand custom-text" href="/home/">
+    <img src="/static/img/ai2.gif" width="30" height="30" class="d-inline-block align-top" alt="">
+    Avunix
+  </a>
+  <button class="navbar-toggler custom-text" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link custom-text" href="/home/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link custom-text dropdown-toggle custom-active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tools
+        </a>
+        <div class="dropdown-menu custom-bg custom-border" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item custom-text custom-active" href="/money/">Money recoder</a>
+          <div class="dropdown-divider custom-divider"></div>
+          <a class="dropdown-item custom-text" href="/reminder/">Reminder</a>
+          <div class="dropdown-divider custom-divider"></div>
+          <a class="dropdown-item custom-text" href="/trace/">Traceoute</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link custom-text" href="/certificate/">Certificate <span class="sr-only">(current)</span></a>
+      </li>      
+      <li class="nav-item">
+        <a class="nav-link custom-text" href="/chatroom/">Chat Room <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+  <!-- Button trigger modal -->
+<a type="button" class="nav-link custom-text" data-toggle="modal" data-target="#exampleModal">
+  Logout
+</a>
+      </li>      
+    </ul>
+  </div>
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content custom-bg custom-border">
+      <div class="modal-header">
+        <h5 class="modal-title custom-text" id="exampleModalLabel">Logout</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom-text">
+        Logout if you want . Don't worry about data and records.
+      </div>
+      <div class="modal-footer custom-divider">
+        <button type="button" class="custom-modal-btn btn btn-secondary" data-dismiss="modal">Close</button>
+        <a type="button" href="/logout/" class="custom-modal-btn btn btn-primary">Logout me</a>
+      </div>
+    </div>
+  </div>
+</div>
+</nav>
+<!--Navbar ends-->
+
+<!--Form starts-->
+<div class="container custom-bg custom-border py-2 my-3">
+
+<p>
+
+  <button class="btn" type="button" data-toggle="collapse" data-target="#collapseMoney" aria-expanded="false" aria-controls="collapseExample">
+    Add money
+  </button>
+</p>
+<div class="collapse" id="collapseMoney">
+  <div class="card card-body custom-bg custom-border">
+  
+  <div class="row justify-content-center">
+ 
+  <form action="/money/" method="post">
+  <div class="form-group row">
+    <div class="col-sm-4">
+      <input  type="datetime-local" class="form-control custom-bg custom-form-font custom-border" id="inputBookName" name="date" required>
+    </div>
+    
+    <div class="col-sm-4 mt-1">
+      <input type="number" class="form-control custom-bg custom-form-font custom-border" id="inputBookName" placeholder="Enter the amount..." name="amount" required>
+    </div>
+    
+    <div class="col-sm-4 mt-1">
+     <select class="custom-select my-1 mr-sm-2 custom-bg custom-form-font custom-border" id="inlineFormCustomSelectPref" name="status">
+    <option value="0" style="color:yellow;" selected>Plus</option>
+    <option value="1" style="color:orange;">Minus</option>
+  </select>
+    </div>    
+    
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-12">
+      <textarea class="form-control  custom-bg custom-form-font custom-border" id="inputAuthorName"  placeholder="Type the matter..." name="about"required></textarea>
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary center-inline custom-submit-btn" id="action-on-press">Save Change</button>
+    </div>
+  </div>
+</form>    
+      
+      
+  </div>
+ </div>
+</div>
+
+</div>
+<!--Form ends-->
+
+
+<!--Validation starts-->
+<div class="container custom-bg custom-border py-2 my-3">
+
+<p>
+
+  <button class="btn" type="button" expanded="true" id="block-check-btn">
+    Check Validation
+  </button>
+</p>
+  <div class="card card-body custom-bg custom-border">
+  
+  <div class="row justify-content-center" id="block-validation">
+      <p class="card-text custom-text" id="total">Opetation has not started yet .</p>
+  </div>
+ </div>
+
+
+</div>
+<!--Validation ends-->
+   
+
+<!-- money table collection start -->
+<div class="container custom-bg custom-border my-3">
+  
+    
+  <div class="row justify-content-center" id="money_fetch">
+    <div class="col-sm-4 my-3">
+    <div class="card custom-bg custom-border">
+      <img class="card-img-top custom-card-img" src="/static/img/money.gif" alt="Card image cap">
+      <div class="card-body" style="margin:0 auto !important;">
+        <h5 class="card-title custom-text">Money Recoder</h5>
+        <button type="button" class="btn custom-btn" data-toggle="modal" data-target="#exampleModal-102369228686491820">
+  Delete
+</button>
+        <a href="http://logo.com" target="_blank" class="btn custom-btn">Open</a>
+      </div>
+      <div class="modal fade" id="exampleModal-102369228686491820" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content custom-bg custom-border">
+      <div class="modal-header">
+        <h5 class="modal-title custom-text" id="exampleModalLabel">Remove certificate</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body custom-text">
+        Are you sure to delete the certificate?
+      </div>
+      <div class="modal-footer custom-divider">
+        <button type="button" class="custom-modal-btn btn btn-secondary" data-dismiss="modal">Close</button>
+        <a type="button" class="custom-modal-btn btn btn-primary" href="/certificate/delete/47">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+  
+  
+  <div class="col-sm-4 my-3">
+    <div class="card custom-bg custom-border">
+      <img class="card-img-top custom-card-img" src="/static/img/money.gif" alt="Card image cap">
+      <div class="card-body" style="margin:0 auto !important;">
+        <h5 class="card-title custom-text">Money Recoder</h5>
+        <button type="button" class="btn custom-btn" data-toggle="modal" data-target="#exampleModal-102369228686491820">
+  Delete
+</button>
+        <a href="http://logo.com" target="_blank" class="btn custom-btn">Open</a>
+      </div>
+      <div class="modal fade" id="exampleModal-102369228686491820" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content custom-bg custom-border">
+      <div class="modal-header">
+        <h5 class="modal-title custom-text" id="exampleModalLabel">Remove certificate</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body custom-text">
+        Are you sure to delete the certificate?
+      </div>
+      <div class="modal-footer custom-divider">
+        <button type="button" class="custom-modal-btn btn btn-secondary" data-dismiss="modal">Close</button>
+        <a type="button" class="custom-modal-btn btn btn-primary" href="/certificate/delete/47">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+
+  
+  
+  </div>
+  
+  <div>
+<!--Show certificates end-->
+
+
+  
+
+</div></div>
+<!--money table collection ends -->
+   
+  
+  <script src="/static/js/bootstarp/jquery-3.5.1.slim.min.js" ></script>
+    <script src="/static/js/bootstarp/popper.min.js" ></script>
+     <script src="/static/js/bootstarp/bootstrap.min.js"></script>
+  
+  <script type="text/javascript">
+  
+    try{
+
+
+
+      function add_tag_Money(data){
+
+        let money_fetch=document.getElementById("money_fetch");
+
+        let html_code=``;
+
+        for(i=0;i<data.length;i++){
+
+          let name=data[i][2];
+          let id=data[i][1]
+          let open_url=`/money/single/${id}`
+          let delete_url=`/money/single/${id}`
+
+          html_code+=`
+          
+          <div class="col-sm-4 my-3">
+    <div class="card custom-bg custom-border">
+      <img class="card-img-top custom-card-img" src="/static/img/money.gif" alt="Card image cap">
+      <div class="card-body" style="margin:0 auto !important;">
+        <h5 class="card-title custom-text">${name}</h5>
+        <button type="button" class="btn custom-btn" data-toggle="modal" data-target="#exampleModal-${id}">
+  Delete
+</button>
+        <a href="${open_url}" target="_blank" class="btn custom-btn">Open</a>
+      </div>
+      <div class="modal fade" id="exampleModal-${id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content custom-bg custom-border">
+      <div class="modal-header">
+        <h5 class="modal-title custom-text" id="exampleModalLabel">Remove certificate</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body custom-text">
+        Are you sure to delete the certificate?
+      </div>
+      <div class="modal-footer custom-divider">
+        <button type="button" class="custom-modal-btn btn btn-secondary" data-dismiss="modal">Close</button>
+        <a type="button" class="custom-modal-btn btn btn-primary" href="${delete_url}">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+          
+          `;
+
+        }
+         
+         money_fetch.innerHTML=html_code;
+        
+      }
+
+    
+   async function getData(url){
+  
+  let params={method:"post"};
+  
+  const domain=await fetch(url,params);
+  
+  let data = await domain.json();
+  
+  return data.data;
+  
+  }
+  
+  getData("/money/tables/data/").then((data)=>{
+  
+      add_tag_Money(data)
+  
+  }).catch(()=>{
+  
+  alert("There is a problem in your network");
+  
+  });
+  
+
+    }
+    
+    catch(a){
+    alert(a.name+" "+a.message)
+    }  
+
+ </script>
+
+  
+  </body>
+  
+</html>

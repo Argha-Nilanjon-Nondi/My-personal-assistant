@@ -11,9 +11,12 @@ app.debug=True
 app.secret_key="r9ruchrh0dh30rjro"
 app.permanent_session_lifetime = timedelta(minutes=3000)
 app.host="0.0.0.0"
-BASE_DIR =os.path.join(os.getcwd(), 'avunix_assistant_web')
+BASE_DIR ="""F:\\argha nondi\\codding\\avunix_assistant_web\\"""
 validated=Validation()
 
+# obj=lib.Certificate("158624666524")
+# obj.input_data("hello.png","http//5869.889;png")
+# obj.delete(2)
 
 
 @app.route("/home/")
@@ -60,9 +63,27 @@ def login():
 		
 	return render_template("login.html",code=code)
 
+@app.route("/money/",methods=["POST","GET"])
+def money_databases():
+	if("status" in session):
+		if(session["status"]=="logged"):
+			return render_template("money/money_home.html")
+	else:
+		return redirect("/")
+
+@app.route("/money/tables/data/",methods=["POST","GET"])
+def money_databases_data():
+	if("status" in session):
+		if(session["status"]=="logged"):
+			obj=lib.Money(session["dbid"])
+			data=obj.show_databases_data()
+			data={"data":data}
+			return data
+	else:
+		return redirect("/")
 	
-@app.route("/money/",methods=["GET","POST"])
-def money():
+@app.route("/money/single/<table_name_id>/",methods=["GET","POST"])
+def money_single(table_name_id):
 	if("status" in session):
 		if(session["status"]=="logged"):
 			
@@ -71,81 +92,77 @@ def money():
 			if request.method=="POST":
 				
 				date=request.form["date"]
-				amount=request.form["amount"]
-				status=request.form["status"]
+				amount=int(request.form["amount"])
+				status=int(request.form["status"])
 				about=request.form["about"]
 				
 				if(validated.checkValue(None,date,amount,status,about) or validated.checkValue("",date,amount,status,about)):
 					return redirect("/")
 			
-				obj.input_data(about,date,amount,status)
-				return render_template("money.html")
+				obj.input_data(table_name_id,about,date,amount,status)
+				return render_template("money/money.html",table_name_id=table_name_id)
 				
-			return render_template("money.html")
+			return render_template("money/money.html",table_name_id=table_name_id)
 	else:
 		return redirect("/")
-		
-		
-		
-						
-@app.route("/reminder/",methods=["GET","POST"])
-def reminder():
-	if("status" in session):
-		
-		if(session["status"]=="logged"):
-			
-			obj=lib.Reminder(session["dbid"])
-			
-			if request.method=="POST":
-				
-				date=request.form["date"]
-				about=request.form["about"]
-				
-				if(validated.checkValue(None,date,about) or validated.checkValue("",date,about)):
-									return redirect("/")
-									
-				obj.input_data(about,date)
-							
-				return render_template("reminder.html")			
-			return render_template("reminder.html")
-	else:
-		return redirect("/")												
-													
-		
-		
-@app.route("/money/data/",methods=["GET","POST"])
-def money_data():
+
+@app.route("/money/single/data/<table_name_id>/",methods=["GET","POST"])
+def money_single_data(table_name_id):
 	if("status" in session):
 		if(session["status"]=="logged"):
 			obj=lib.Money(session["dbid"])
-			data=obj.show_data
+			data=obj.show_single_data(table_name_id)
 			data={"data":data}
 			return data
 	else:
 		return redirect("/")
 		
-@app.route("/money/signature/",methods=["GET","POST"])
-def money_signature():
+@app.route("/money/single/signature/<table_name_id>/",methods=["GET","POST"])
+def money_single_signature(table_name_id):
 	if("status" in session):
 		if(session["status"]=="logged"):
 			obj=lib.Money(session["dbid"])
-			data=obj.show_signature
+			data=obj.show_signature(table_name_id)
 			data={"data":data}
 			return data
 	else:
 		return redirect("/")
 
-@app.route("/money/validation/",methods=["GET","POST"])
-def money_validation_data():
+@app.route("/money/single/validation/<table_name_id>",methods=["GET","POST"])
+def money_single_validation_data(table_name_id):
 	if("status" in session):
 		if(session["status"]=="logged"):
 			obj=lib.Money(session["dbid"])
-			data=obj.check_validation
+			data=obj.check_validation(table_name_id)
 			data={"data":data}
 			return data
 	else:
 		return redirect("/")		
-						
+
+
+@app.route("/reminder/", methods=["GET", "POST"])
+def reminder():
+	if ("status" in session):
+
+		if (session["status"] == "logged"):
+
+			obj = lib.Reminder(session["dbid"])
+
+			if request.method == "POST":
+
+				date = request.form["date"]
+				about = request.form["about"]
+
+				if (validated.checkValue(None, date, about) or validated.checkValue("", date, about)):
+					return redirect("/")
+
+				obj.input_data(about, date)
+
+				return render_template("reminder.html")
+			return render_template("reminder.html")
+	else:
+		return redirect("/")
+
 @app.route("/reminder/data/",methods=["GET","POST"])
 def reminder_data():
 	if("status" in session):
@@ -315,7 +332,18 @@ def chat_enter(own,other,msg):
 			obj.send_msg(msg);			
 			return "true";
 	else:
-		return redirect("/")												
+		return redirect("/")
+
+
+@app.route("/money/home")
+def money_home():
+	if("status" in session):
+		if(session["status"]=="logged"):
+			print("*****")
+			return render_template("money/money_home.html")
+	else:
+		return redirect("/")
+
 """
 @app.route("/home")
 def home():
