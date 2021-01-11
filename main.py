@@ -67,6 +67,10 @@ def login():
 def money_databases():
 	if("status" in session):
 		if(session["status"]=="logged"):
+			if request.method == "POST":
+				collection = request.form["collection"]
+				obj=lib.Money(session["dbid"])
+				obj.add_table(collection)
 			return render_template("money/money_home.html")
 	else:
 		return redirect("/")
@@ -88,7 +92,7 @@ def money_single(table_name_id):
 		if(session["status"]=="logged"):
 			
 			obj=lib.Money(session["dbid"])
-			
+			fetch_table_name=obj.get_table_name(table_name_id)
 			if request.method=="POST":
 				
 				date=request.form["date"]
@@ -100,9 +104,20 @@ def money_single(table_name_id):
 					return redirect("/")
 			
 				obj.input_data(table_name_id,about,date,amount,status)
-				return render_template("money/money.html",table_name_id=table_name_id)
+				return render_template("money/money.html",table_name_id=table_name_id,fetch_table_name=fetch_table_name)
 				
-			return render_template("money/money.html",table_name_id=table_name_id)
+			return render_template("money/money.html",table_name_id=table_name_id,fetch_table_name=fetch_table_name)
+	else:
+		return redirect("/")
+
+
+@app.route("/money/delete/<table_name_id>/",methods=["GET","POST"])
+def money_delete_database(table_name_id):
+	if("status" in session):
+		if(session["status"]=="logged"):
+			obj=lib.Money(session["dbid"])
+			obj.delete_table_name(table_name_id)
+			return redirect("/money/")
 	else:
 		return redirect("/")
 

@@ -14,7 +14,7 @@ users_dir = """F:\\argha nondi\\codding\\avunix_assistant_web\\users\\"""
 def user_single(dbid):
     return users_dir+"""{0}""".format(dbid)
 
-print(user_single("00000"))
+#print(user_single("00000"))
 # print(sql.sqlite_run("12355525355money",""" SELECT * from money_all """))
 
 class Login:
@@ -217,6 +217,19 @@ class Money:
     def __init__(self, database) -> object:
         self.database = database
 
+    def delete_table_name(self, table_id):
+        user_dir_single = user_single(self.database)
+        os.chdir(user_dir_single)
+        sql.sqlite_run("money", """DROP TABLE "{0}";""".format(table_id))
+        sql.row_delet("money","datas","id",table_id)
+        return "true"
+
+    def get_table_name(self, table_id):
+        user_dir_single = user_single(self.database)
+        os.chdir(user_dir_single)
+        table = sql.sqlite_run("money", """SELECT name FROM datas WHERE id={0};""".format(table_id))[0][0]
+        return table
+
     def add_table(self, table_name):
 
         user_dir_single = user_single(self.database)
@@ -264,7 +277,6 @@ class Money:
             return "true"
 
         except Exception as a:
-            print(a)
             return "false"
 
     def show_databases_data(self):
@@ -273,7 +285,6 @@ class Money:
         os.chdir(user_dir_single)
         code = """Select no,id,name from datas;"""
         record = sql.sqlite_run("money", code)
-        print((record))
         record.reverse()
         for i in record:
             data.append([i[0], i[1], i[2]])
@@ -285,7 +296,6 @@ class Money:
         os.chdir(user_dir_single)
         code = """Select about,entery_date,event_date,status,amount,previous_hash,hash from '{0}';""".format(table_name)
         record = sql.sqlite_run("money", code)
-        print((record))
         record.reverse()
         for i in record:
             data.append([i[0], i[1], i[2], i[3], i[4], i[5], i[6]])
@@ -317,11 +327,8 @@ class Money:
         else:
             no = str(no[0][0] + 1)
 
-        print(no)
-
         previous_hash = sql.sqlite_run("money", """SELECT hash FROM '{0}' order by no desc  limit 1;""".format(table_name))[0][0]
-        #previous_hash="AAAAAAA"
-        print(previous_hash)
+
 
         blo = Block()
 
@@ -341,8 +348,9 @@ class Money:
                 ["hash", blo.mh()],
                 ["previous_hash", previous_hash]
             ])
+            return "true"
         except Exception as a:
-            print(a)
+            return "false"
 
     def check_validation(self, table_name):
         chain = self.show_single_data(table_name).copy()
@@ -375,14 +383,11 @@ class Money:
                 "amount":cu_amount}
             block.ts = cu_enterdate
             block.ph = cu_phash
-            print(block.ph,block.ts,block.mh(),sep="\n")
-
 
             if (cu_hash != block.mh()):
                 return "false"
 
             if (pre_hash != cu_phash):
-                print("err")
                 return "false"
 
         return "true"
@@ -401,6 +406,7 @@ class Money:
 
 #input=7e51e0a656a0805298ddf453ea1a2a714a2ba5362df89ad9f498a670a4ab1911
 # obj = Money("158624666524")
+# print(obj.get_table_name(420610565563))
 # # obj.add_table("hacktaberfestpopo")
 # # print(obj.show_databases_data())
 # obj.input_data(table_name="16261208982",about="AAAAAiyhlukAAA",time="1000-01-01T12:00",amount=0,status=0)
@@ -433,7 +439,6 @@ class Certificate:
             sql.db_insert("certificate", "certificate", [["url", self.url], ["img_name", self.img_name], ["no", no]])
             return "true"
         except Exception as a:
-            print(a)
             return "false"
 
     def delete(self, no):
@@ -449,12 +454,10 @@ class Certificate:
 
         if (self.no in record):
 
-            print(str((self.no)[0]))
-
             sql.row_delet("certificate", "certificate", "no", str((self.no)[0]))
-
+            return "true"
         else:
-            pass
+            return "false"
 
     @property
     def show_data(self):
@@ -582,11 +585,13 @@ class ChatRoom:
 
         limit_no = "90"  # limit of msg
         code1 = """SELECT time,msg FROM chatroom WHERE dbid = '{0}' Limit {1}""".format(self.me, limit_no)
-        os.chdir(users_dir)
-        record1 = sql.sqlite_run(self.other, code1)
-
+        user_dir_single = user_single(self.other)
+        os.chdir(user_dir_single)
+        record1 = sql.sqlite_run("chatroom", code1)
+        user_dir_single = user_single(self.me)
+        os.chdir(user_dir_single)
         code2 = """SELECT time,msg FROM chatroom WHERE dbid = '{0}' Limit {1}""".format(self.other, limit_no)
-        record2 = sql.sqlite_run(self.me, code2)
+        record2 = sql.sqlite_run("chatroom", code2)
 
         total = []
 
@@ -612,11 +617,10 @@ class ChatRoom:
         return total
 
     def send_msg(self, msg):
-
-        os.chdir(users_dir)
         code = """SELECT no FROM chatroom ORDER BY no DESC LIMIT 1;"""
-        os.chdir(users_dir)
-        no = sql.sqlite_run(self.other, code)
+        user_dir_single = user_single(self.other)
+        os.chdir(user_dir_single)
+        no = sql.sqlite_run("chatroom", code)
         if (len(no) == 0):
             no = "1"
         else:
@@ -624,9 +628,10 @@ class ChatRoom:
 
         try:
             time = str(datetime.datetime.now());
-            sql.db_insert(self.other, "chatroom", [["no", no], ["msg", msg], ["dbid", self.me], ["time", time]])
+            sql.db_insert("chatroom" ,"chatroom", [["no", no], ["msg", msg], ["dbid", self.me], ["time", time]])
+            return "true"
         except Exception as a:
-            print(a)
+            return "false"
 
 # obj=ChatRoom(own="33859112054",#other="46312894429")
 # print(obj.show_list())

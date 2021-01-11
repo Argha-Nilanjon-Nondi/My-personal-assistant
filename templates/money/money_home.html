@@ -88,7 +88,7 @@
 <p>
 
   <button class="btn" type="button" data-toggle="collapse" data-target="#collapseMoney" aria-expanded="false" aria-controls="collapseExample">
-    Add money
+    Add Money collection
   </button>
 </p>
 <div class="collapse" id="collapseMoney">
@@ -98,32 +98,21 @@
  
   <form action="/money/" method="post">
   <div class="form-group row">
-    <div class="col-sm-4">
-      <input  type="datetime-local" class="form-control custom-bg custom-form-font custom-border" id="inputBookName" name="date" required>
+    
+    
+    <div class="col-sm-12 mt-1">
+      <input type="text" class="form-control custom-bg custom-form-font custom-border" id="inputBookName" placeholder="Enter the name..." name="collection" required>
     </div>
     
-    <div class="col-sm-4 mt-1">
-      <input type="number" class="form-control custom-bg custom-form-font custom-border" id="inputBookName" placeholder="Enter the amount..." name="amount" required>
-    </div>
-    
-    <div class="col-sm-4 mt-1">
-     <select class="custom-select my-1 mr-sm-2 custom-bg custom-form-font custom-border" id="inlineFormCustomSelectPref" name="status">
-    <option value="0" style="color:yellow;" selected>Plus</option>
-    <option value="1" style="color:orange;">Minus</option>
-  </select>
-    </div>    
+      
     
   </div>
   
-  <div class="form-group row">
-    <div class="col-sm-12">
-      <textarea class="form-control  custom-bg custom-form-font custom-border" id="inputAuthorName"  placeholder="Type the matter..." name="about"required></textarea>
-    </div>
-  </div>
+
   
   <div class="form-group row">
     <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary center-inline custom-submit-btn" id="action-on-press">Save Change</button>
+      <button type="submit" class="btn btn-primary center-inline custom-submit-btn" id="action-on-press">Add A Collection</button>
     </div>
   </div>
 </form>    
@@ -136,27 +125,6 @@
 </div>
 <!--Form ends-->
 
-
-<!--Validation starts-->
-<div class="container custom-bg custom-border py-2 my-3">
-
-<p>
-
-  <button class="btn" type="button" expanded="true" id="block-check-btn">
-    Check Validation
-  </button>
-</p>
-  <div class="card card-body custom-bg custom-border">
-  
-  <div class="row justify-content-center" id="block-validation">
-      <p class="card-text custom-text" id="total">Opetation has not started yet .</p>
-  </div>
- </div>
-
-
-</div>
-<!--Validation ends-->
-   
 
 <!-- money table collection start -->
 <div class="container custom-bg custom-border my-3">
@@ -263,7 +231,7 @@
           let name=data[i][2];
           let id=data[i][1]
           let open_url=`/money/single/${id}`
-          let delete_url=`/money/single/${id}`
+          let delete_url=`/money/delete/${id}`
 
           html_code+=`
           
@@ -281,13 +249,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content custom-bg custom-border">
       <div class="modal-header">
-        <h5 class="modal-title custom-text" id="exampleModalLabel">Remove certificate</h5>
+        <h5 class="modal-title custom-text" id="exampleModalLabel">Remove money collection</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <div class="modal-body custom-text">
-        Are you sure to delete the certificate?
+        Are you sure to delete the money collection named ${name}?
       </div>
       <div class="modal-footer custom-divider">
         <button type="button" class="custom-modal-btn btn btn-secondary" data-dismiss="modal">Close</button>

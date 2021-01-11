@@ -1,29 +1,15 @@
   
   function money_lister(row){
   
-  let total=0;
+  let table_name=row[row.length-1][2]
+
+  let link=document.getElementById("money-latest-table")
   
   let tr1=document.getElementById("total");
   
-  row.forEach((element)=>{
- 
-  let status=element[3];
-  let amount=element[4];
-  var str_status="";
-  
-  if(status=="0"){
-  total+=Number(amount);
-  str_status="Increase"
-  }
-  
-  if(status=="1"){
-  total-=Number(amount);
-  str_status="Decrease"
-  }
-  
-   tr1.innerHTML=`Total : ${total}  -/TK`;
-    
-  });
+   link.setAttribute("href",`/money/single/${row[row.length-1][1]}/`)
+
+   tr1.innerHTML=`Last created table : ${table_name}`;
   
   }
   
@@ -42,12 +28,12 @@
   
   }
   
-  getData("/money/data/").then((data)=>{
+  getData("/money/tables/data/").then((data)=>{
   
    money_lister(data);
   
-  }).catch(()=>{
+  })/*.catch(()=>{
   
   alert("There is a problem in your network");
   
-  });
+  });*/
