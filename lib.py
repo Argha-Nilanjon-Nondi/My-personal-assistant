@@ -129,8 +129,7 @@ class CreatAccount:
             return True
 
 
-# obj=CreatAccount("pcic095@gmail.com","avunix","9143")
-# print(obj.create())
+#
 
 
 class Reminder:
